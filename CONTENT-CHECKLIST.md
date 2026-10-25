@@ -11,8 +11,9 @@ All site copy lives in `src/lib/content.ts`. The CV is `public/cv-developer.html
 
 ## Facts still needed (nothing is invented in the meantime)
 
-- [ ] **Dates per contribution.** When was each piece built (enrollment forms, account closing,
-      online payments, discounts, migration), and in which role (Developer vs Product Owner)?
+- [~] **Dates per contribution.** 2025–26 is now dated from the ERP ticket history
+      (enrollment, discounts, migration). Account closing and online payments are still
+      undated: check the old Wela ERP (2020 to March 2025).
 - [ ] **Team vs you.** For each story: who else worked on it, and what did they own?
 - [ ] **Product decisions and tradeoffs.** Pages only list rules from the public demo code.
       Real decisions you made (what was cut, what you weighed, who you consulted) are missing.

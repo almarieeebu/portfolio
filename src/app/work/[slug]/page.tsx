@@ -171,6 +171,10 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
             <p className="mt-3 text-base leading-relaxed text-ink">{story.context}</p>
           </Section>
 
+          <Section title="When and in what role">
+            <Bullets items={story.timeline} />
+          </Section>
+
           <Section title="Problem">
             <p className="mt-3 text-base leading-relaxed text-ink">{story.problem}</p>
           </Section>

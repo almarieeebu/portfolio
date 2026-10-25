@@ -69,6 +69,7 @@ export type StoryPart = {
   demo?: string;
   sourceUrl?: string;
   shot?: Shot;
+  when?: string;
 };
 
 export type Story = {
@@ -82,6 +83,8 @@ export type Story = {
   role: string;
   /** Page fields. */
   context: string;
+  /** Dated facts from the ERP ticket history. Only what the tickets show. */
+  timeline: string[];
   problem: string;
   built: string[];
   parts?: { heading: string; note?: string; items: StoryPart[] };
@@ -111,6 +114,10 @@ export const stories: Story[] = [
     role: "Developer: built the forms, approval workflow, and validation rules.",
     context:
       "A school management system used by registrars, deans, finance officers, and cashiers. A college applicant becomes an enrolled student only after the right people approve the subjects and fees.",
+    timeline: [
+      "June to August 2025, as Senior Web Developer at Livro Systems: built the college applicant, enrollee, and matriculation forms, and the step that enrolls an applicant, on the Frappe 15 rebuild of the school system. The tickets defined the scope; I implemented it.",
+      "September 2025 to early 2026: follow-up fixes and enhancements on the same area, including enrollment form rules, accepting a student, and linking continuing students to their previous records.",
+    ],
     problem:
       "Enrollment was split across the application, the subject list, fees, and approvals. Registrars, deans, and finance staff had no single path from a new applicant to a finished enrollment.",
     built: [
@@ -180,6 +187,11 @@ export const stories: Story[] = [
     role: "Developer: four separate contributions to the billing system.",
     context:
       "The billing side of a school management system, used by cashiers and finance officers to charge fees, post payments, and close each term.",
+    timeline: [
+      "June to August 2025, as Senior Web Developer: built college billing settings, school fees, college discounts, and batch ledger adjustments on the Frappe 15 rebuild.",
+      "August to September 2025: fixes for discounts that did not reflect or were duplicated on the student ledger.",
+      "November 2025 onward: tellering, SMS billing, and cashiering fixes on the version 15 system, continuing through 2026. The account closing and online payments contributions are not dated here.",
+    ],
     problem:
       "Finance work was held up in four different places: closing a term, posting payments at the cashier desk, recording fees paid online, and applying discounts.",
     built: [],
@@ -296,6 +308,12 @@ export const stories: Story[] = [
     role: "Developer: set up default roles, fee mapping, and file recovery.",
     context:
       "A school's site was moved to a newer platform version. The data came across, but the people using it and the records they relied on did not line up.",
+    timeline: [
+      "November 2025 to March 2026: ID-number migration for a school moving from an earlier system, plus migration error fixes.",
+      "October 2025 to March 2026: role-permission and access fixes, including restricting the System Manager role on school sites and documenting portal access by role and module.",
+      "July to August 2026: a selective data migration from Frappe v11 to v15, built in phases, with dynamic field mapping and a file-list fix.",
+      "The demo recreates the roles, fee mapping, and file-recovery rules. The dated work above is related production work in the same area, not a one-to-one match.",
+    ],
     problem:
       "After a platform version upgrade, staff had the wrong roles, school fees did not map, and some file records had no file on disk.",
     built: [
