@@ -160,7 +160,7 @@ export default function Home() {
             <div id="resume" className="scroll-mt-16">
               <Eyebrow>Résumé</Eyebrow>
               <h2 className="mt-2 font-display text-2xl font-semibold tracking-tight text-ink">
-                Choose the résumé that fits the role
+                Résumé
               </h2>
               <ul className="mt-4 space-y-3">
                 {resumes.map((r) => (

@@ -37,6 +37,7 @@ export const metadata: Metadata = {
   keywords: [
     "Software Developer",
     "Product Owner",
+    "Quality Assurance",
     "Web Developer",
     "Frappe",
     "JavaScript",

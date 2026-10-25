@@ -1,7 +1,6 @@
 # Content checklist (private)
 
-All site copy lives in `src/lib/content.ts`. The CVs are `public/cv.html` and
-`public/cv-developer.html` (plus PDFs) and must say the same thing as the site.
+All site copy lives in `src/lib/content.ts`. The CV is `public/cv-developer.html` (plus its PDF) and must say the same thing as the site. The Frappe / ERPNext CV was dropped; `/cv.html` redirects to the main CV.
 
 ## Confirmed
 
@@ -27,12 +26,14 @@ All site copy lives in `src/lib/content.ts`. The CVs are `public/cv.html` and
       and `/demo/sms-and-email`. Say if they should be linked somewhere.
 - [ ] **LinkedIn URL** could not be verified automatically (LinkedIn blocks bots). Please click it.
 - [ ] **Domain.** If `almariedev.com` is yours, decide whether to point it at Vercel, then
-      update `site.url` and both CVs.
+      update `site.url` and the CV.
 - [ ] **Education** is on no résumé or page.
 
 ## When something changes
 
-- Role or dates: `experience` in `content.ts`, then both CV HTML files, then regenerate PDFs
+- Role or dates: `experience` in `content.ts`, then the CV HTML file, then regenerate the PDF
   (`Chrome --headless --print-to-pdf`).
-- Domain: `site.url` in `content.ts`, the portfolio link in both CVs, regenerate PDFs.
-- Run `bash scripts/check-cv.sh public/cv.html` and `public/cv-developer.html` after CV edits.
+- Domain: `site.url` in `content.ts`, the portfolio link in the CV, regenerate the PDF.
+- Run `bash scripts/check-cv.sh public/cv-developer.html` after CV edits.
+
+- Positioning follows PR #20: React, TypeScript, Tailwind, Vitest and Playwright are shown as "Currently learning", not production experience.

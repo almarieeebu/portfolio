@@ -15,7 +15,7 @@ export const site = {
   intro:
     "6+ years building enrollment, billing, and payment systems for schools, mostly on Frappe with Python, JavaScript, and SQL. Product Owner at Livro Systems since January 2026, after progressing from Junior to Senior Web Developer.",
   availability:
-    "Open to software developer and product owner roles · Remote or hybrid · UTC+8",
+    "Open to Web Developer, Product Owner, and Quality Assurance roles · Remote or hybrid · UTC+8",
   email: "almariebullo@gmail.com",
   linkedin: "https://www.linkedin.com/in/almarie-alim-bullo/",
   github: "https://github.com/almarieeebu",
@@ -25,13 +25,8 @@ export const site = {
 export const resumes = [
   {
     href: "/cv-developer.html",
-    label: "Software developer résumé",
-    note: "Python, JavaScript, SQL, React and TypeScript. Includes my Product Owner role.",
-  },
-  {
-    href: "/cv.html",
-    label: "Frappe / ERPNext résumé",
-    note: "School-systems and ERP depth, with a product-ownership summary.",
+    label: "Résumé (web development, product ownership, QA)",
+    note: "Includes my Product Owner role since January 2026. Also available as a PDF from the page.",
   },
 ];
 
@@ -414,10 +409,11 @@ export const experience = [
 
 export const capabilities = [
   { label: "Backend and data", items: "Python, SQL, MariaDB, REST APIs, permissions, background jobs, payment and SMS integrations" },
-  { label: "Frontend", items: "JavaScript, React, TypeScript, Tailwind CSS, accessible forms and tables" },
+  { label: "Frontend", items: "HTML, CSS, JavaScript" },
   { label: "Business workflows", items: "Approvals, validation rules, billing and payment logic, reports, data migration" },
   { label: "Product ownership", items: "Turning school processes into clear tickets and coordinating delivery with developers" },
-  { label: "Tools", items: "Git, GitHub, Linux, Vitest, Playwright" },
+  { label: "Tools", items: "Git, GitHub, Linux" },
+  { label: "Currently learning", items: "TypeScript, React, Tailwind CSS, Vitest, Playwright. Used on the code samples above, not yet in production work." },
 ];
 
 export const contact = {
