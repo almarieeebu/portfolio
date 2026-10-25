@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Card,
   Desk,
@@ -77,13 +77,17 @@ function figures(asm: Assessment) {
   };
 }
 
-export default function CollegeDemo() {
+const SCENARIO_ROLE = "Finance Officer";
+const SCENARIO_APPLICANT = "APP-0003"; // Mark Joseph: 1,500.00 paid of a 5,000.00 down payment.
+
+export default function CollegeDemo({ scenario }: { scenario?: string }) {
+  const preset = scenario === "invalid-enrollment";
   const { state, save, reset } = useDemoStore<CollegeState>(
     "demo:college-enrollment:v1",
     collegeSeed,
   );
-  const [role, setRole] = useState("Registrar");
-  const [selected, setSelected] = useState<string | null>(null);
+  const [role, setRole] = useState(preset ? SCENARIO_ROLE : "Registrar");
+  const [selected, setSelected] = useState<string | null>(preset ? SCENARIO_APPLICANT : null);
   const [error, setError] = useState<string | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
 
@@ -98,6 +102,18 @@ export default function CollegeDemo() {
       if (e instanceof LogicError) say(null, e.message);
       else throw e;
     }
+  };
+
+  // A shared scenario link must start from the sample data, not from saved edits.
+  useEffect(() => {
+    if (preset) reset();
+  }, [preset, reset]);
+
+  const startScenario = () => {
+    reset();
+    setRole(SCENARIO_ROLE);
+    setSelected(SCENARIO_APPLICANT);
+    say(null);
   };
 
   const counts = pipelineCounts(state.assessments);
@@ -127,7 +143,13 @@ export default function CollegeDemo() {
       title="College admission and enrollment"
       intro="A browser simulation of a Frappe v15 app. The real app is built in Frappe; this page re-creates its approval workflow and business rules with no server. Pick a role, then work an applicant from Draft to Enrolled."
       tryThis={TRY_THIS}
-      backHref="/?panel=work&study=college-enrollment"
+      quickStart={{
+        title: "See how the workflow prevents an invalid enrollment",
+        text: `Mark Joseph's assessment is waiting for Finance, but he has paid only ${money(1500)} of the ${money(TERM.requiredDownpayment)} down payment. As Finance Officer, press Enroll and the payment rule blocks it.`,
+        button: "Start this scenario",
+        onStart: startScenario,
+      }}
+      backHref="/work/college-enrollment"
       onReset={() => {
         reset();
         setSelected(null);

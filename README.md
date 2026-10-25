@@ -1,13 +1,11 @@
-# Almarie Bullo — Web Development · Product Ownership · Quality Assurance
+# Almarie Bullo — Software Developer & Product Owner
 
-Personal portfolio and CVs: an IT professional with 6+ years of web development experience, open to Web Developer, Product Owner, and Quality Assurance roles. Live at [almariedev.com](https://almariedev.com/).
+Personal portfolio. Live at [portfolio-almariebu.vercel.app](https://portfolio-almariebu.vercel.app/).
+The custom domain `almariedev.com` did not resolve in DNS when last checked, so no file points at it.
 
 ## Stack
 
-- Next.js (App Router)
-- TypeScript
-- Tailwind CSS
-- Vercel
+- Next.js (App Router), TypeScript, Tailwind CSS, Vercel
 
 ## Develop
 
@@ -16,23 +14,18 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
-
-## Scripts
-
 | Command | Description |
 | --- | --- |
 | `npm run dev` | Local development |
 | `npm run build` | Production build |
-| `npm run start` | Serve production build |
 | `npm run lint` | ESLint |
+| `npm test` | Node tests (demo business rules, legacy-link map) |
 
-## Customize
+## Structure
 
-Edit `src/lib/content.ts` for copy, projects, tools, and contact links.
+- `/` — introduction, three selected stories, code samples, experience, résumé and contact.
+- `/work/<slug>` — one shareable case-study page per story.
+- `/demo/*` — browser simulations of the school-system rules, using sample data.
+- Old links (`/?panel=…&study=…`, `/work/<old-slug>`, `/#work/<slug>`) are mapped in `src/lib/redirects.ts`.
 
-Panels are shareable via query string, e.g. `/?panel=work` or `/?panel=about`.
-
-## Deploy
-
-Connected to GitHub. Vercel deploys automatically from `main`.
+All copy lives in `src/lib/content.ts`. Missing facts are tracked in `CONTENT-CHECKLIST.md`, not on the site.

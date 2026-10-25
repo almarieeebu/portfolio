@@ -76,7 +76,7 @@ export default function BasicEdDemo() {
       title="Basic education enrollment"
       intro="A browser simulation of a Frappe v15 app. The real app is built in Frappe; this page re-creates its enrollment rules and class-list permissions with no server. Switch roles to see what each one can do."
       tryThis={TRY_THIS}
-      backHref="/?panel=work&study=basic-ed-enrollment"
+      backHref="/work/college-enrollment#basic-education"
       onReset={() => {
         reset();
         setError(null);

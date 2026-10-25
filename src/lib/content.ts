@@ -1,392 +1,401 @@
 /**
- * Site copy. Positioned as an IT professional with a web development
- * foundation, open to Web Developer, Product Owner, and Quality Assurance
- * roles. Frappe/ERPNext is part of the background, not the whole identity.
- * Tools still being learned (TypeScript, React, Tailwind, Vitest, Playwright)
- * are labelled "Currently learning", never as proven experience.
+ * Site copy. Every claim here must trace to the CVs in public/, the
+ * school_demo README, or the demo code. Missing facts are recorded in
+ * CONTENT-CHECKLIST.md, never invented here.
  */
-export type Pending<T> = T | null;
-
 export const site = {
   name: "Almarie Bullo",
   initials: "AB",
   photo: "/almarie.jpg",
-  roles: ["Web Developer", "Product Owner", "Quality Assurance"],
-  headlineLead: "Building better digital solutions.",
-  headlineAccent: "Web development · Product ownership · Quality assurance",
+  roles: ["Software Developer", "Product Owner"],
+  title: "Software Developer & Product Owner",
   company: "Livro Systems, Inc.",
   formerCompany: "Wela School Systems",
+  tagline: "I turn complex school and business workflows into reliable software.",
   intro:
-    "I'm an IT professional with 6+ years of web development experience, passionate about solving problems, improving workflows, and building useful digital solutions. I bring a strong technical foundation, a curious mindset, and a willingness to learn new technologies and explore new opportunities.",
+    "6+ years building enrollment, billing, and payment systems for schools, mostly on Frappe with Python, JavaScript, and SQL. Product Owner at Livro Systems since January 2026, after progressing from Junior to Senior Web Developer.",
   availability:
     "Open to Web Developer, Product Owner, and Quality Assurance roles · Remote or hybrid · UTC+8",
   email: "almariebullo@gmail.com",
   linkedin: "https://www.linkedin.com/in/almarie-alim-bullo/",
-  github: "https://github.com/almariebu",
-  resume: "/cv-developer.html",
+  github: "https://github.com/almarieeebu",
   url: "https://portfolio-almariebu.vercel.app",
 };
 
-export const screenshotNote =
-  "This screenshot is not the actual system. It is for visualization only.";
-
-export type DisciplineId = "web" | "product" | "quality" | "learning";
-
-export const disciplines: {
-  id: DisciplineId;
-  label: string;
-  title: string;
-  description: string;
-  capabilities: string[];
-}[] = [
+export const resumes = [
   {
-    id: "web",
-    label: "Web development",
-    title: "My core foundation",
-    description:
-      "6+ years building and maintaining business web applications: forms, approval workflows, billing and payment logic, reports, integrations, and data migration. Most of it on Frappe and ERPNext.",
-    capabilities: [
-      "Python",
-      "JavaScript",
-      "HTML",
-      "CSS",
-      "SQL",
-      "MariaDB",
-      "REST APIs",
-      "Frappe",
-      "ERPNext",
-      "Git",
-    ],
-  },
-  {
-    id: "product",
-    label: "Product & process",
-    title: "From business need to delivered feature",
-    description:
-      "As Product Owner since January 2026, I turn school enrollment, billing, and payment processes into clear, deliverable tickets and work with the development team to ship them. Years of building those workflows taught me how the business runs.",
-    capabilities: [
-      "Requirements analysis",
-      "Workflow analysis",
-      "Ticket writing",
-      "Stakeholder coordination",
-      "Feature delivery",
-    ],
-  },
-  {
-    id: "quality",
-    label: "Quality assurance",
-    title: "Finding and fixing what breaks",
-    description:
-      "Debugging and fixing issues on live production systems, validation rules that stop bad data, and unit tests for business logic. Test plans and automated testing are what I am building on now.",
-    capabilities: [
-      "Debugging",
-      "Production fixes",
-      "Validation rules",
-      "Unit tests",
-      "Test plans",
-    ],
-  },
-  {
-    id: "learning",
-    label: "Currently learning",
-    title: "Growing beyond one stack",
-    description:
-      "I like learning new tools. Right now I am working through TypeScript, React, Tailwind CSS, and test automation with Vitest and Playwright, using them on the projects in this portfolio.",
-    capabilities: ["TypeScript", "React", "Tailwind CSS", "Vitest", "Playwright"],
+    href: "/cv-developer.html",
+    label: "Résumé (web development, product ownership, QA)",
+    note: "Includes my Product Owner role since January 2026. Also available as a PDF from the page.",
   },
 ];
 
-/** The role areas a project shows evidence for. */
-export type Area = "Web Development" | "Product & Process" | "Quality Assurance";
+export type EvidenceKind = "production" | "demo-code" | "simulation" | "sample";
 
-export type Project = {
+export const evidenceKinds: Record<EvidenceKind, { label: string; hint: string }> = {
+  production: {
+    label: "Professional production experience",
+    hint: "Work on live school systems. The production system is private, so it is shown through recreated demos.",
+  },
+  "demo-code": {
+    label: "Public demonstration code",
+    hint: "Installable Frappe v15 app that re-implements the business rules with sample data.",
+  },
+  simulation: {
+    label: "Browser simulation",
+    hint: "Runs in your browser with no server. Recreated demo using sample data.",
+  },
+  sample: {
+    label: "Personal code sample",
+    hint: "Built on my own to practise and show code. Not production work.",
+  },
+};
+
+export const recreatedNote = "Recreated demo using sample data.";
+
+const schoolDemoRepo = "https://github.com/almarieeebu/school_demo";
+const schoolDemo = (anchor: string) => `${schoolDemoRepo}#${anchor}`;
+
+export type Shot = { src: string; alt: string; w: number; h: number };
+
+export type StoryPart = {
+  id: string;
+  /** "Separate contribution" or "Supporting example". */
+  kind: string;
   title: string;
-  areas: Area[];
   problem: string;
   built: string[];
-  result: string;
-  stack: string[];
-  liveUrl?: string;
-  repoUrl: string;
-  image?: string;
-  imageAlt?: string;
-};
-
-export const projects: Project[] = [
-  {
-    title: "Frappe contract tracker",
-    areas: ["Web Development", "Product & Process", "Quality Assurance"],
-    problem:
-      "A freelancer needs to know which quotes are approved, what has been paid, and who still owes money.",
-    built: [
-      "A Frappe 15 app with Client, Contract, Contract Item, and Payment doctypes. Totals, paid amount, and balance are calculated on save.",
-      "Draft, Approved, and Done workflow. Only the Freelance Owner can approve, and only when the total is above zero.",
-      "Payment checks: a payment needs an approved contract and cannot be more than the balance. Submitting it updates the contract balance.",
-      "Owner and assistant roles, an Unpaid Contracts report, a sample data loader, and 11 unit tests for the business logic.",
-    ],
-    result:
-      "The Unpaid Contracts report lists only approved or done contracts that still have a balance. Draft quotes and paid contracts stay off it.",
-    stack: ["Python", "Frappe", "JavaScript", "MariaDB"],
-    repoUrl: "https://github.com/almariebu/frappe-contract-tracker",
-  },
-  {
-    title: "UI component kit",
-    areas: ["Web Development", "Quality Assurance"],
-    problem:
-      "Teams that build business forms and tables need components that are consistent, keyboard accessible, and tested.",
-    built: [
-      "Button, Input, Modal, Table, and Toast components in React and TypeScript.",
-      "Accessible by default: labelled inputs, announced errors, native dialog, sortable table headers with aria-sort, polite toast region.",
-      "Responsive layout styled with Tailwind CSS, checked at phone width.",
-      "19 unit tests (Vitest) and 10 end-to-end tests (Playwright).",
-    ],
-    result:
-      "A live demo page where every component works, with tests that run on desktop and phone viewports.",
-    stack: ["React", "TypeScript", "Tailwind CSS", "Vitest", "Playwright"],
-    liveUrl: "https://ui-kit-almariebu.vercel.app/",
-    repoUrl: "https://github.com/almariebu/portfolio/tree/main/ui-kit",
-    image: "/work/ui-kit.png",
-    imageAlt: "UI kit demo with buttons, an email input, a students table, and a toast",
-  },
-];
-
-export type CaseStudy = {
-  slug: string;
-  areas: Area[];
-  title: string;
-  category: string;
-  summary: string;
-  featured: boolean;
-  problem: string;
-  responsibility: string[];
-  improvement: string;
-  stack: string[];
-  image?: string;
-  imageAlt?: string;
-  /** Path of an interactive browser demo for this case study. */
+  outcome: string;
   demo?: string;
-  /** Where this case study is built as real Frappe code (a section of the school_demo README). */
   sourceUrl?: string;
+  shot?: Shot;
+  when?: string;
 };
 
-const schoolDemo = (anchor: string) => `https://github.com/almariebu/school_demo#${anchor}`;
+export type Story = {
+  slug: string;
+  title: string;
+  metaDescription: string;
+  /** Overview-card fields. */
+  helps: string;
+  problemShort: string;
+  outcomeShort: string;
+  role: string;
+  /** Page fields. */
+  context: string;
+  /** Dated facts from the ERP ticket history. Only what the tickets show. */
+  timeline: string[];
+  problem: string;
+  built: string[];
+  parts?: { heading: string; note?: string; items: StoryPart[] };
+  decisions: string[];
+  technical: string[];
+  outcome: string;
+  evidence: EvidenceKind[];
+  stack: string[];
+  shot: Shot;
+  demo: string;
+  demoLabel: string;
+  demoHint?: string;
+  sourceUrl: string;
+};
 
-export const caseStudies: CaseStudy[] = [
+export const stories: Story[] = [
   {
     slug: "college-enrollment",
-    areas: ["Web Development", "Product & Process"],
     title: "College admission and enrollment",
-    category: "Enrollment",
-    summary:
-      "One path from application to a finished enrollment for registrars, deans, and finance.",
-    featured: true,
+    metaDescription:
+      "Case study: one approval path from college applicant to locked enrollment, with unit limits and a payment check. Frappe, Python, JavaScript.",
+    helps: "Registrars, deans, and finance staff",
+    problemShort:
+      "Enrollment was split across the application, subjects, fees, and approvals, with no single path to a finished enrollment.",
+    outcomeShort:
+      "A student moves from application to a locked enrollment in one system, with payments and approvals checked on the form.",
+    role: "Developer: built the forms, approval workflow, and validation rules.",
+    context:
+      "A school management system used by registrars, deans, finance officers, and cashiers. A college applicant becomes an enrolled student only after the right people approve the subjects and fees.",
+    timeline: [
+      "June to August 2025, as Senior Web Developer at Livro Systems: built the college applicant, enrollee, and matriculation forms, and the step that enrolls an applicant, on the Frappe 15 rebuild of the school system. The tickets defined the scope; I implemented it.",
+      "September 2025 to early 2026: follow-up fixes and enhancements on the same area, including enrollment form rules, accepting a student, and linking continuing students to their previous records.",
+    ],
     problem:
       "Enrollment was split across the application, the subject list, fees, and approvals. Registrars, deans, and finance staff had no single path from a new applicant to a finished enrollment.",
-    responsibility: [
+    built: [
       "Three connected forms: applicant, subject-and-fee, and enrolled student.",
       "A multi-step approval workflow: Draft, dean, registrar, finance.",
       "Validation rules: unit limits, term fees, and a payment check before enrollment can be locked.",
       "Safe re-runs: running enrollment again never wipes an already-enrolled student.",
     ],
-    improvement:
-      "A student moves from application to a locked enrollment in one system. Payments and approvals are checked on the form, not over email.",
+    parts: {
+      heading: "Supporting example",
+      items: [
+        {
+          id: "basic-education",
+          kind: "Supporting example",
+          title: "Basic education enrollment",
+          problem:
+            "Basic-education records drifted after go-live: the wrong incoming grade, duplicate enrollments, and leftover records after withdrawal.",
+          built: [
+            "Fixed grade-level logic.",
+            "Blocked duplicate enrollments.",
+            "Cleaned up related records on withdrawal.",
+            "Limited teachers to their own classes.",
+          ],
+          outcome:
+            "Registrars can enroll, continue, and withdraw students without duplicate rows.",
+          demo: "/demo/basic-ed-enrollment",
+          sourceUrl: schoolDemo("case-study-2-basic-education-enrollment"),
+        },
+      ],
+    },
+    decisions: [
+      "Finance cannot lock an enrollment until the paid down payment meets the term's requirement. The rule is checked on save and on submit, not left to a reviewer.",
+      "Fee totals and units are computed on the server from the chosen subjects. Units sent by the browser are ignored.",
+      "Enrollment is get-or-update by applicant and term, and the student payload is normalised without blanking existing data. A bad contact detail only warns; it does not stop the flow.",
+    ],
+    technical: [
+      "Frappe v15 DocTypes: Applicant, a submittable Enrollment Assessment with subject and fee child tables, and Enrolled Student.",
+      "Workflow with Draft, Pending Dean, Pending Registrar, Pending Finance, and a locked Enrolled state, plus Reject.",
+      "Roles: Dean, Registrar, Finance Officer, Cashier. Each sees only the actions their state allows.",
+      "Business rules live in a plain Python module with no Frappe imports, so they are tested with unittest and no bench.",
+    ],
+    outcome:
+      "A student moves from application to a locked enrollment in one system. Payments and approvals are checked on the form, not over email. No usage figures are claimed here.",
+    evidence: ["production", "demo-code", "simulation"],
     stack: ["Frappe", "Python", "JavaScript", "MariaDB"],
-    image: "/work/college.png",
-    imageAlt: "College matriculation form with an approval workflow",
-    demo: "/demo/college-enrollment",
+    shot: {
+      src: "/work/college-enrollment.png",
+      alt: "Enrollment demo with Mark Joseph's assessment pending finance and the down payment check blocking enrollment",
+      w: 1105,
+      h: 952,
+    },
+    demo: "/demo/college-enrollment?scenario=invalid-enrollment",
+    demoLabel: "See how the workflow prevents an invalid enrollment",
+    demoHint: "Opens as Finance Officer with a student who has not paid the down payment. The full workflow stays available.",
     sourceUrl: schoolDemo("case-study-1-college-admission-and-enrollment"),
   },
   {
-    slug: "account-closing",
-    areas: ["Web Development", "Quality Assurance"],
-    title: "Account closing and cashiering",
-    category: "Billing",
-    summary:
-      "Cashiers can close a term and post payments when the live process was failing.",
-    featured: true,
-    problem:
-      "At the end of each term, cashiers could not close student accounts or post payments, which stopped the cashier desk.",
-    responsibility: [
-      "Account closing runs in the background and builds student ledgers.",
-      "Clear on-screen messages when a closing cannot start.",
-      "Down payment and reconciliation updates for cashiers.",
-      "Overpayments stay on the student ledger instead of being dropped.",
-      "Penalty dates fixed so a penalty is due on the date itself.",
+    slug: "billing-and-payments",
+    title: "School billing, payments, and cashiering",
+    metaDescription:
+      "Case study: term account closing, cashiering, online payments, and student discounts for school finance staff. Frappe, Python, SQL.",
+    helps: "Cashiers and finance staff",
+    problemShort:
+      "At term end cashiers could not close accounts or post payments, fees paid online were retyped by hand, and discounts lived in several places.",
+    outcomeShort:
+      "Cashiers can close accounts and post payments including overpayments, and online payments and discounts land on the student account.",
+    role: "Developer: four separate contributions to the billing system.",
+    context:
+      "The billing side of a school management system, used by cashiers and finance officers to charge fees, post payments, and close each term.",
+    timeline: [
+      "June to August 2025, as Senior Web Developer: built college billing settings, school fees, college discounts, and batch ledger adjustments on the Frappe 15 rebuild.",
+      "August to September 2025: fixes for discounts that did not reflect or were duplicated on the student ledger.",
+      "November 2025 onward: tellering, SMS billing, and cashiering fixes on the version 15 system, continuing through 2026. The account closing and online payments contributions are not dated here.",
     ],
-    improvement: "Cashiers can close accounts and post payments, including overpayments.",
-    stack: ["Frappe", "Python", "JavaScript", "SQL"],
-    image: "/work/closing.png",
-    imageAlt: "Account closing form with a tellering table",
+    problem:
+      "Finance work was held up in four different places: closing a term, posting payments at the cashier desk, recording fees paid online, and applying discounts.",
+    built: [],
+    parts: {
+      heading: "Four separate contributions",
+      note: "These were distinct pieces of work on the same billing system. They are grouped because they serve the same finance staff. They were not one project or one release.",
+      items: [
+        {
+          id: "account-closing",
+          kind: "Separate contribution",
+          title: "Account closing and cashiering",
+          problem:
+            "At the end of each term, cashiers could not close student accounts or post payments, which stopped the cashier desk.",
+          built: [
+            "Account closing runs in the background and builds student ledgers.",
+            "Clear on-screen messages when a closing cannot start.",
+            "Down payment and reconciliation updates for cashiers.",
+            "Overpayments stay on the student ledger instead of being dropped.",
+            "Penalty dates fixed so a penalty is due on the date itself.",
+          ],
+          outcome: "Cashiers can close accounts and post payments, including overpayments.",
+          demo: "/demo/account-closing",
+          sourceUrl: schoolDemo("case-study-5-account-closing-and-cashiering"),
+          shot: {
+            src: "/work/billing-closing.png",
+            alt: "Account closing demo showing student ledgers and a cash count",
+            w: 1105,
+            h: 613,
+          },
+        },
+        {
+          id: "online-payments",
+          kind: "Separate contribution",
+          title: "Online payments",
+          problem:
+            "Schools collect fees online, but staff still had to retype a paid fee onto the student account.",
+          built: [
+            "Online fee payments are pulled into billing.",
+            "Paid amounts are allocated to the student's fees automatically.",
+            "Payment links come from school settings, not hardcoded addresses.",
+          ],
+          outcome: "A fee paid online lands on the student account without someone retyping it.",
+          demo: "/demo/online-payments",
+          sourceUrl: schoolDemo("case-study-3-online-payments"),
+          shot: {
+            src: "/work/billing-payments.png",
+            alt: "Online payments demo allocating a paid fee to the oldest due date",
+            w: 1105,
+            h: 564,
+          },
+        },
+        {
+          id: "student-discounts",
+          kind: "Separate contribution",
+          title: "Student discounts",
+          problem:
+            "Finance entered discounts in several places and had no single view of who received one.",
+          built: [
+            "Discounts calculated from the full assessment or from the remaining balance.",
+            "Batch discounts that apply one rule to many students.",
+            "A discount summary report filtered by school year, semester, and discount type.",
+          ],
+          outcome:
+            "Finance can see who received a discount and apply a batch from one screen, without rebuilding numbers in a spreadsheet.",
+          demo: "/demo/student-discounts",
+          sourceUrl: schoolDemo("case-study-6-student-discounts"),
+          shot: {
+            src: "/work/billing-discounts.png",
+            alt: "Student discounts demo with a batch rule and a summary report",
+            w: 1105,
+            h: 620,
+          },
+        },
+      ],
+    },
+    decisions: [
+      "Overpayment is kept as credit on the ledger instead of being rejected or dropped.",
+      "A repeated delivery of the same online payment changes nothing. The gateway reference is the unique key, so two simultaneous deliveries cannot both succeed.",
+      "Open fees are locked while a payment is allocated, so two payments cannot spend the same balance.",
+      "A paid fee is allocated to the oldest due date first, and any extra becomes credit.",
+      "Discounts are capped at their base, and a batch skips students who already have the discount.",
+    ],
+    technical: [
+      "Account closing is queued to a background job with Queued, Running, Done, and Failed states, and builds one ledger per student.",
+      "Online payments arrive through a signed webhook. The signature is checked with HMAC-SHA256 and a bad one is rejected with 401.",
+      "A cash count reconciles counted cash against posted payments as Balanced, Over, or Short.",
+      "Discount summary is a Frappe Script Report. Percent or fixed discounts run from a single rule function.",
+      "Rules sit in a Frappe-free Python module and are tested with unittest.",
+    ],
+    outcome:
+      "Each contribution closes the gap named above. The separate outcomes are listed under each contribution. No payment volumes or time savings are claimed here.",
+    evidence: ["production", "demo-code", "simulation"],
+    stack: ["Frappe", "Python", "JavaScript", "SQL", "Payment integration"],
+    shot: {
+      src: "/work/billing-closing.png",
+      alt: "Account closing demo showing student ledgers and a cash count",
+      w: 1105,
+      h: 613,
+    },
     demo: "/demo/account-closing",
+    demoLabel: "Try the account closing demo",
     sourceUrl: schoolDemo("case-study-5-account-closing-and-cashiering"),
   },
   {
-    slug: "student-discounts",
-    areas: ["Web Development", "Product & Process"],
-    title: "Student discounts",
-    category: "Billing",
-    summary:
-      "Finance can see every discount and apply a batch without a spreadsheet.",
-    featured: true,
-    problem:
-      "Finance entered discounts in several places and had no single view of who received one.",
-    responsibility: [
-      "Discounts calculated from the full assessment or from the remaining balance.",
-      "Batch discounts that apply one rule to many students.",
-      "A discount summary report filtered by school year, semester, and discount type.",
-    ],
-    improvement:
-      "Finance can see who received a discount and apply a batch from one screen, without rebuilding numbers in a spreadsheet.",
-    stack: ["Frappe", "Python", "SQL", "Reporting"],
-    image: "/work/discounts.png",
-    imageAlt: "Student discount summary report",
-    demo: "/demo/student-discounts",
-    sourceUrl: schoolDemo("case-study-6-student-discounts"),
-  },
-  {
-    slug: "erp-livro",
-    areas: ["Product & Process", "Web Development"],
-    title: "ERP Livro: employee lifecycle and access",
-    category: "Internal ERP",
-    summary:
-      "Employee onboarding, offboarding, and access requests in the internal ERP.",
-    featured: true,
-    problem:
-      "Employee onboarding, offboarding, and user access requests needed to run in the internal ERP.",
-    responsibility: [
-      "Develop and maintain features for employee onboarding, offboarding, and user access requests.",
-    ],
-    improvement:
-      "Onboarding, offboarding, and access requests are handled in ERP Livro.",
-    stack: ["Frappe", "ERPNext", "Python"],
-  },
-  {
-    slug: "basic-ed-enrollment",
-    areas: ["Web Development", "Quality Assurance"],
-    title: "Basic education enrollment",
-    category: "Enrollment",
-    summary:
-      "Registrars can enroll, continue, and withdraw students without duplicate rows.",
-    featured: false,
-    problem:
-      "Basic-education records drifted after go-live: the wrong incoming grade, duplicate enrollments, and leftover records after withdrawal.",
-    responsibility: [
-      "Fixed grade-level logic.",
-      "Blocked duplicate enrollments.",
-      "Cleaned up related records on withdrawal.",
-      "Limited teachers to their own classes.",
-    ],
-    improvement:
-      "Registrars can enroll, continue, and withdraw students without duplicate rows.",
-    stack: ["Frappe", "Python", "JavaScript", "Permissions"],
-    image: "/work/bed.png",
-    imageAlt: "Enrollees form used for basic education",
-    demo: "/demo/basic-ed-enrollment",
-    sourceUrl: schoolDemo("case-study-2-basic-education-enrollment"),
-  },
-  {
     slug: "roles-and-migration",
-    areas: ["Web Development"],
     title: "Roles and data migration",
-    category: "Data",
-    summary:
-      "A migrated site comes up with the right roles, mapped fees, and recovered files.",
-    featured: false,
+    metaDescription:
+      "Case study: restoring default roles, fee mappings, and missing file attachments after a platform upgrade. Frappe, Python, SQL, Linux.",
+    helps: "System administrators and school staff after an upgrade",
+    problemShort:
+      "After a platform upgrade, staff had the wrong roles, school fees did not map, and some file records had no file on disk.",
+    outcomeShort:
+      "A migrated site opens with usable roles, mapped fees, and a way to recover attachments.",
+    role: "Developer: set up default roles, fee mapping, and file recovery.",
+    context:
+      "A school's site was moved to a newer platform version. The data came across, but the people using it and the records they relied on did not line up.",
+    timeline: [
+      "November 2025 to March 2026: ID-number migration for a school moving from an earlier system, plus migration error fixes.",
+      "October 2025 to March 2026: role-permission and access fixes, including restricting the System Manager role on school sites and documenting portal access by role and module.",
+      "July to August 2026: a selective data migration from Frappe v11 to v15, built in phases, with dynamic field mapping and a file-list fix.",
+      "The demo recreates the roles, fee mapping, and file-recovery rules. The dated work above is related production work in the same area, not a one-to-one match.",
+    ],
     problem:
       "After a platform version upgrade, staff had the wrong roles, school fees did not map, and some file records had no file on disk.",
-    responsibility: [
+    built: [
       "Set up default roles.",
       "Mapped school fees.",
       "Recovered missing file attachments without overwriting existing files.",
     ],
-    improvement:
-      "A migrated site opens with usable roles, mapped fees, and a way to recover attachments.",
+    decisions: [
+      "Default roles follow the person's designation. Roles they already hold are kept, so the step is safe to run again.",
+      "Fee codes that cannot be mapped are reported, not guessed.",
+      "File recovery never overwrites a file already on disk, and reads only from a folder inside the site's private backups.",
+    ],
+    technical: [
+      "Three actions in one Migration Tools screen: apply default roles, map legacy fees, recover files.",
+      "Designation-to-role and fee-code maps are stored as DocTypes (Designation Role Map, Fee Code Map).",
+      "All three actions need System Manager (fee mapping also allows Finance Officer).",
+      "Rules sit in a Frappe-free Python module and are tested with unittest.",
+    ],
+    outcome:
+      "A migrated site opens with usable roles, mapped fees, and a way to recover attachments. No counts of affected users or records are claimed here.",
+    evidence: ["production", "demo-code", "simulation"],
     stack: ["Frappe", "Python", "SQL", "Linux"],
-    image: "/work/migration.png",
-    imageAlt: "Data migration screen for roles and files",
+    shot: {
+      src: "/work/roles-migration.png",
+      alt: "Migration tools demo showing role assignment, fee mapping, and file recovery results",
+      w: 1105,
+      h: 648,
+    },
     demo: "/demo/roles-and-migration",
+    demoLabel: "Try the migration demo",
     sourceUrl: schoolDemo("case-study-8-roles-and-data-migration"),
-  },
-  {
-    slug: "online-payments",
-    areas: ["Web Development"],
-    title: "Online payments",
-    category: "Billing",
-    summary:
-      "A fee paid online lands on the student account without retyping.",
-    featured: false,
-    problem:
-      "Schools collect fees online, but staff still had to retype a paid fee onto the student account.",
-    responsibility: [
-      "Online fee payments are pulled into billing.",
-      "Paid amounts are allocated to the student's fees automatically.",
-      "Payment links come from school settings, not hardcoded addresses.",
-    ],
-    improvement:
-      "A fee paid online lands on the student account without someone retyping it.",
-    stack: ["Frappe", "Python", "Payment integration"],
-    demo: "/demo/online-payments",
-    sourceUrl: schoolDemo("case-study-3-online-payments"),
-  },
-  {
-    slug: "grading",
-    areas: ["Web Development", "Quality Assurance"],
-    title: "Grading",
-    category: "Grading",
-    summary:
-      "Grade records and class lists show current student data, and the report prints.",
-    featured: false,
-    problem:
-      "Registrars and teachers opened grade records that showed an old student name, or a grade report that would not print correctly.",
-    responsibility: [
-      "Fixed grade records and class lists.",
-      "Fixed a report print format.",
-    ],
-    improvement:
-      "Grade records, class lists, and the report show current student data.",
-    stack: ["Frappe", "Python"],
-    demo: "/demo/grading",
-    sourceUrl: schoolDemo("case-study-7-grading"),
-  },
-  {
-    slug: "sms-and-email",
-    areas: ["Web Development"],
-    title: "SMS and email notifications",
-    category: "Messaging",
-    summary:
-      "Billing texts and email digests go out on the current sender.",
-    featured: false,
-    problem:
-      "Billing text messages still used the old SMS provider, and some email digests sat unsent.",
-    responsibility: [
-      "Moved billing text messages to a new SMS provider.",
-      "Fixed stuck email digests by routing them through the default email account.",
-    ],
-    improvement:
-      "Schools can send the billing text and the email digest without the old provider or a stuck queue.",
-    stack: ["Frappe", "Python", "Messaging integration"],
-    demo: "/demo/sms-and-email",
-    sourceUrl: schoolDemo("case-study-4-sms-and-email-notifications"),
   },
 ];
 
-export const experience: {
-  org: string;
-  note?: string;
-  roles: { title: string; dates: string; note?: string }[];
-}[] = [
+export type CodeSample = {
+  title: string;
+  summary: string;
+  stack: string[];
+  repoUrl: string;
+  liveUrl?: string;
+};
+
+export const codeSamples: CodeSample[] = [
+  {
+    title: "Frappe contract tracker",
+    summary:
+      "A Frappe 15 app for a freelancer: draft, approved, and done contracts, payment checks against the balance, and an Unpaid Contracts report. 11 unit tests.",
+    stack: ["Python", "Frappe", "MariaDB"],
+    repoUrl: "https://github.com/almarieeebu/frappe-contract-tracker",
+  },
+  {
+    title: "UI component kit",
+    summary:
+      "Button, Input, Modal, Table, and Toast in React, TypeScript, and Tailwind CSS. Keyboard accessible, with 19 unit tests (Vitest) and 10 end-to-end tests (Playwright).",
+    stack: ["React", "TypeScript", "Tailwind CSS", "Playwright"],
+    repoUrl: "https://github.com/almarieeebu/portfolio/tree/main/ui-kit",
+    liveUrl: "https://ui-kit-almariebu.vercel.app/",
+  },
+];
+
+export const experience = [
   {
     org: "Livro Systems, Inc.",
     roles: [
       {
         title: "Product Owner",
         dates: "January 2026 – Present",
+        points: [
+          "Own the school management system and ERP Livro, delivering feature and fix tickets with the development team.",
+          "Turn school enrollment, billing, and payment processes into clear, deliverable system tickets.",
+        ],
       },
       {
         title: "Senior Web Developer",
         dates: "April 2025 – December 2025",
+        points: ["Delivered feature and fix tickets on the school management system and ERP Livro."],
       },
     ],
+    erp: {
+      title: "ERP Livro: employee lifecycle and access",
+      text: "Develop and maintain features for employee onboarding, employee offboarding, and user access requests in the internal ERP.",
+    },
   },
   {
     org: "Wela School Systems",
@@ -394,52 +403,37 @@ export const experience: {
       {
         title: "Senior Web Developer",
         dates: "February 2024 – March 2025",
+        points: [
+          "Delivered tellering and billing tickets: payment status, fee allocation, matriculation, discounts, and statements of account.",
+          "Delivered pre-enrollment and enrollment tickets for basic education and college.",
+          "Configured role permissions for finance and registrar users.",
+        ],
       },
       {
         title: "Mid-Senior Web Developer",
         dates: "September 2023 – February 2024",
+        points: ["Resolved billing tickets on live production sites, including ledger adjustments and discounts."],
       },
       {
         title: "Junior Web Developer",
         dates: "March 2020 – September 2023",
+        points: [
+          "Developed online enrollment forms, grade slips and grading rules, and college billing features.",
+        ],
       },
     ],
   },
 ];
 
-export const about = {
-  eyebrow: "About",
-  title: "IT professional, web developer since 2020",
-  paragraphs: [
-    "I'm an IT professional with over six years of web development experience, building and maintaining business applications that support real school operations: enrollment, billing, payments, approvals, grading, and data migration. Most of that work was on the Frappe framework and ERPNext, with Python, JavaScript, and SQL.",
-    "I started as a Junior Web Developer at Wela School Systems in March 2020, grew to Senior Web Developer, and have been the Product Owner in Product Development at Livro Systems, Inc. (formerly Wela) since January 2026. That path gave me experience in development, troubleshooting live systems, and turning business needs into delivered features.",
-    "My foundation is web development, but I'm not limiting myself to one framework. I'm learning new tools and growing into product ownership and software quality assurance.",
-    "I'm open to Web Developer, Product Owner, or Quality Assurance roles. I value collaboration, continuous learning, clear communication, and building software that makes work easier for people.",
-  ],
-  facts: [
-    { label: "Experience", value: "Since March 2020" },
-    { label: "Company", value: "Livro Systems, Inc. (formerly Wela)" },
-    { label: "Now", value: "Product Owner, full-time" },
-    { label: "Development", value: "Python, JavaScript, HTML, CSS, SQL" },
-    { label: "Data and APIs", value: "MariaDB, REST APIs, payment and SMS integrations" },
-    { label: "Frameworks and tools", value: "Frappe, ERPNext, Git, GitHub, Linux" },
-    { label: "Product and process", value: "Requirements and workflow analysis, ticket writing, delivery with developers" },
-    { label: "Quality", value: "Debugging, production fixes, unit tests, test plans" },
-    { label: "Currently learning", value: "TypeScript, React, Tailwind CSS, Vitest, Playwright" },
-    { label: "Open to", value: "Web Developer, Product Owner, and QA roles · Remote or hybrid, UTC+8" },
-  ],
-};
+export const capabilities = [
+  { label: "Backend and data", items: "Python, SQL, MariaDB, REST APIs, permissions, background jobs, payment and SMS integrations" },
+  { label: "Frontend", items: "HTML, CSS, JavaScript" },
+  { label: "Business workflows", items: "Approvals, validation rules, billing and payment logic, reports, data migration" },
+  { label: "Product ownership", items: "Turning school processes into clear tickets and coordinating delivery with developers" },
+  { label: "Tools", items: "Git, GitHub, Linux" },
+  { label: "Currently learning", items: "TypeScript, React, Tailwind CSS, Vitest, Playwright. Used on the code samples above, not yet in production work." },
+];
 
 export const contact = {
-  eyebrow: "Contact",
-  title: "Let's work together",
-  lead: "I'm open to Web Developer, Product Owner, and Quality Assurance roles, remote or hybrid. Send me a message. The button opens an email draft. The address below works if you prefer to write directly.",
-  responseTime: "I usually reply within a few days.",
-  projectTypes: [
-    "Job opportunity",
-    "Web app",
-    "Bug fix",
-    "Report or workflow",
-    "Something else",
-  ],
+  lead: "Email is the fastest way to reach me. I usually reply within a few days.",
 };

@@ -62,19 +62,19 @@ export default function OpengraphImage() {
               flexWrap: "wrap",
             }}
           >
-            {site.headlineLead}
+            {site.title}
           </div>
           <div
             style={{
               color: "#c9a86b",
-              fontSize: 52,
+              fontSize: 44,
               fontWeight: 700,
               lineHeight: 1.08,
               letterSpacing: -2,
               marginTop: 6,
             }}
           >
-            {site.headlineAccent}
+            {site.tagline}
           </div>
         </div>
 
