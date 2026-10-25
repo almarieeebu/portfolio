@@ -3,10 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "node scripts/dev.mjs",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test:portfolio": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test scripts/*.test.mjs src/lib/demo/*.test.ts",
+    "preview": "node scripts/dev.mjs --production"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",

@@ -24,9 +24,9 @@ export function AboutPanel() {
               <ul className="mt-2 space-y-2">
                 {group.roles.map((role) => (
                   <li key={`${group.org}-${role.title}`}>
-                    <div className="flex items-baseline justify-between gap-3">
+                    <div className="flex flex-col items-start justify-between gap-1 sm:flex-row sm:items-baseline sm:gap-3">
                       <p className="text-sm text-night-ink">{role.title}</p>
-                      <p className="shrink-0 text-right text-sm text-night-muted">
+                      <p className="text-sm text-night-muted sm:shrink-0 sm:text-right">
                         {role.dates}
                       </p>
                     </div>

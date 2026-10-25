@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect } from "react";
 import {
   caseStudies,
   projects,
@@ -14,12 +15,24 @@ import {
 export function WorkPanel({
   slug,
   onSlug,
+  revealStudy = true,
 }: {
   slug: string;
   onSlug: (slug: string) => void;
+  revealStudy?: boolean;
 }) {
   const featured = caseStudies.filter((study) => study.featured);
   const more = caseStudies.filter((study) => !study.featured);
+
+  useEffect(() => {
+    if (!revealStudy) return;
+    // A project link should reveal the project that was actually selected.
+    const frame = requestAnimationFrame(() => {
+      if (slug === caseStudies[0].slug) return;
+      document.getElementById(`study-${slug}`)?.scrollIntoView({ block: "start" });
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [slug, revealStudy]);
 
   return (
     <div className="flex flex-col gap-8">
@@ -44,6 +57,7 @@ export function WorkPanel({
         <div className="mt-3 flex flex-col gap-2">
           {more.map((study) => (
             <details
+              id={`study-${study.slug}`}
               key={study.slug}
               open={study.slug === slug}
               className="rounded-2xl border border-night-line bg-night-soft"
@@ -168,7 +182,7 @@ function ProjectArticle({ project }: { project: Project }) {
 
 function StudyArticle({ study }: { study: CaseStudy }) {
   return (
-    <article className="rounded-2xl border border-night-line bg-night-soft">
+    <article id={`study-${study.slug}`} className="rounded-2xl border border-night-line bg-night-soft">
       {study.image ? <StudyImage study={study} /> : null}
       <div className="space-y-4 px-4 py-4 sm:px-5 sm:py-5">
         <div>

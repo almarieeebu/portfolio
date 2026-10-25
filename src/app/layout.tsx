@@ -65,13 +65,15 @@ export const metadata: Metadata = {
     follow: true,
   },
   icons: {
-    icon: "/favicon.svg",
+    icon: "/icons/icon-192.png",
+    apple: "/icons/apple-touch-icon.png",
   },
 };
 
 export const viewport: Viewport = {
-  // Matches the paper header at the top of the page, not the dark body below.
-  themeColor: "#f8f7f4",
+  // Match the white header, including standalone mobile installations.
+  themeColor: "#FFFFFF",
+  viewportFit: "cover",
   width: "device-width",
   initialScale: 1,
 };
@@ -117,7 +119,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${sourceSans.variable} ${sora.variable} antialiased`}
     >
       <body
-        className="h-full overflow-hidden bg-night text-foreground"
+        className="bg-night text-foreground"
         // Grammarly (and similar extensions) add data-* attributes to body
         // before hydration. Those are not part of the server HTML.
         suppressHydrationWarning

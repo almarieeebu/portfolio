@@ -75,3 +75,21 @@ export function panelHref(
 export function workHref(study: string, part: WorkPart) {
   return panelHref("work", study, part);
 }
+
+/** Shared by initial rendering and history navigation, including old links. */
+export function readPortfolioLocation(search: string, hash = ""): {
+  panel: PanelId;
+  study: string | null;
+  part: WorkPart;
+} {
+  const legacy = panelFromHash(hash);
+  if (legacy) return { ...legacy, part: "overview" };
+  const params = new URLSearchParams(search);
+  const panel = params.get("panel");
+  const part = params.get("part");
+  return {
+    panel: isPanelId(panel) ? panel : "home",
+    study: params.get("study"),
+    part: isWorkPart(part) ? part : "overview",
+  };
+}

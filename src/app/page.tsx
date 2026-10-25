@@ -9,7 +9,7 @@ function first(value: string | string[] | undefined) {
 export default async function Home({ searchParams }: PageProps<"/">) {
   const params = await searchParams;
   const requested = first(params.panel);
-  const panel: PanelId = isPanelId(requested) ? requested : "practice";
+  const panel: PanelId = isPanelId(requested) ? requested : "home";
   const study = first(params.study) ?? null;
   const requestedPart = first(params.part);
   const part: WorkPart = isWorkPart(requestedPart) ? requestedPart : "overview";
