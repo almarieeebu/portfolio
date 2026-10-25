@@ -21,12 +21,12 @@ const sora = localFont({
   display: "swap",
 });
 
-const description = site.intro;
+const description = `${site.tagline} ${site.intro}`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} | ${site.roles.join(" · ")}`,
+    default: `${site.name} | ${site.title}`,
     template: `%s · ${site.name}`,
   },
   description,
@@ -35,10 +35,10 @@ export const metadata: Metadata = {
   creator: site.name,
   alternates: { canonical: "/" },
   keywords: [
-    "Web Developer",
     "Software Developer",
-    "Frontend Developer",
-    "Full-Stack Developer",
+    "Product Owner",
+    "Web Developer",
+    "Frappe",
     "JavaScript",
     "TypeScript",
     "React",
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     "SQL",
   ],
   openGraph: {
-    title: `${site.name} | ${site.roles.join(" · ")}`,
+    title: `${site.name} | ${site.title}`,
     description,
     type: "website",
     locale: "en_US",
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.name} | ${site.roles.join(" · ")}`,
+    title: `${site.name} | ${site.title}`,
     description,
   },
   robots: {
@@ -69,7 +69,6 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  // Matches the paper header at the top of the page, not the dark body below.
   themeColor: "#f8f7f4",
   width: "device-width",
   initialScale: 1,
@@ -113,7 +112,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${sourceSans.variable} ${sora.variable} antialiased`}
     >
       <body
-        className="h-full overflow-hidden bg-night text-foreground"
+        className="bg-paper text-foreground"
         // Grammarly (and similar extensions) add data-* attributes to body
         // before hydration. Those are not part of the server HTML.
         suppressHydrationWarning

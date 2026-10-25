@@ -48,7 +48,7 @@ export default function GradingDemo() {
       title="Grading"
       intro="A browser simulation of a real app built in Frappe. Enter grades for a class list, rename a student, and print a grade report. Nothing leaves your browser."
       tryThis={TRY_THIS}
-      backHref="/?panel=work&study=grading"
+      backHref="/#work"
       onReset={() => {
         reset();
         setEntry({});

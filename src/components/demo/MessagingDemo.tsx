@@ -71,7 +71,7 @@ export default function MessagingDemo() {
       title="SMS and email notifications"
       intro="A browser simulation of a real app built in Frappe. Billing texts pick an SMS provider, and email digests send through an email account. No message is really sent."
       tryThis={TRY_THIS}
-      backHref="/?panel=work&study=sms-and-email"
+      backHref="/#work"
       onReset={() => {
         reset();
         clear();

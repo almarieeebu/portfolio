@@ -91,7 +91,7 @@ export default function ClosingDemo() {
       title="Account closing and cashiering"
       intro="A browser simulation of a real app built in Frappe. The real app closes the term in a background job; here a timer stands in for the job queue. Nothing leaves your browser."
       tryThis={TRY_THIS}
-      backHref="/?panel=work&study=account-closing"
+      backHref="/work/billing-and-payments#account-closing"
       onReset={() => {
         reset();
         setJob(null);

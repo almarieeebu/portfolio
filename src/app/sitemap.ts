@@ -1,21 +1,20 @@
 import type { MetadataRoute } from "next";
-import { caseStudies, site } from "@/lib/content";
+import { site, stories } from "@/lib/content";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [
-    {
-      url: site.url,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 1,
-    },
-    ...caseStudies
-      .filter((study) => study.demo)
-      .map((study) => ({
-        url: `${site.url}${study.demo}`,
-        lastModified: new Date(),
-        changeFrequency: "monthly" as const,
-        priority: 0.6,
-      })),
-  ];
+  const demoPaths = stories
+    .flatMap((story) => [story.demo, ...(story.parts?.items.map((part) => part.demo) ?? [])])
+    .flatMap((path) => (path ? [path.split("?")[0]] : []));
+  const paths = [
+    ["", 1],
+    ...stories.map((story) => [`/work/${story.slug}`, 0.8] as const),
+    ...[...new Set(demoPaths)].map((path) => [path, 0.5] as const),
+  ] as const;
+
+  return paths.map(([path, priority]) => ({
+    url: `${site.url}${path}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority,
+  }));
 }

@@ -50,7 +50,7 @@ export default function MigrationDemo() {
       title="Roles and data migration"
       intro="A browser simulation of a real app built in Frappe. It shows a freshly migrated site and the three fixes that make it usable: default roles, mapped fees, and recovered files. Nothing leaves your browser."
       tryThis={TRY_THIS}
-      backHref="/?panel=work&study=roles-and-migration"
+      backHref="/work/roles-and-migration"
       onReset={() => {
         reset();
         clear();

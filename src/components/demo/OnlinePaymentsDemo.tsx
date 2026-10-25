@@ -58,7 +58,7 @@ export default function OnlinePaymentsDemo() {
       title="Online payments"
       intro="A browser simulation of a real app built in Frappe. Payments made on the school's online page arrive in a feed; billing pulls them in and allocates them. Nothing leaves your browser."
       tryThis={TRY_THIS}
-      backHref="/?panel=work&study=online-payments"
+      backHref="/work/billing-and-payments#online-payments"
       onReset={() => {
         reset();
         setDraft(null);

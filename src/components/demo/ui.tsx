@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { recreatedNote } from "@/lib/content";
 
 export const inputClass =
   "w-full rounded-md border border-paper-line bg-white px-3 py-2 text-sm text-ink placeholder:text-ink-muted/70 focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-gold-deep";
@@ -19,6 +20,7 @@ export function DemoShell({
   tryThis,
   backHref,
   onReset,
+  quickStart,
   children,
 }: {
   title: string;
@@ -26,19 +28,21 @@ export function DemoShell({
   tryThis: string[];
   backHref: string;
   onReset: () => void;
+  /** A one-click scenario for first-time visitors. The full workflow stays available. */
+  quickStart?: { title: string; text: string; button: string; onStart: () => void };
   children: React.ReactNode;
 }) {
   return (
-    <div className="pane-scroll h-full overflow-y-auto bg-night text-night-ink">
+    <div className="dark-zone min-h-screen bg-night text-night-ink">
       <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6 sm:py-10">
         <Link
           href={backHref}
-          className="text-sm font-medium text-gold hover:text-gold-bright focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+          className="inline-flex min-h-11 items-center text-sm font-medium text-gold hover:text-gold-bright focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
         >
-          &larr; Back to the case study
+          &larr; {backHref.startsWith("/work/") ? "Back to the case study" : "Back to selected work"}
         </Link>
         <p className="mt-6 text-xs font-semibold tracking-[0.16em] text-gold uppercase">
-          Live demo
+          Browser simulation · {recreatedNote}
         </p>
         <h1 className="mt-2 font-display text-[clamp(1.6rem,4vw,2.4rem)] font-semibold leading-tight tracking-[-0.02em]">
           {title}
@@ -46,8 +50,22 @@ export function DemoShell({
         <p className="mt-3 max-w-3xl text-sm leading-relaxed text-night-muted sm:text-base">
           {intro}
         </p>
+        {quickStart ? (
+          <div className="mt-5 max-w-3xl rounded-xl border border-gold/60 bg-night-soft p-4">
+            <h2 className="text-sm font-semibold text-gold">Quick start</h2>
+            <p className="mt-1 font-display text-lg font-semibold text-night-ink">{quickStart.title}</p>
+            <p className="mt-1 text-sm leading-relaxed text-night-muted">{quickStart.text}</p>
+            <button
+              type="button"
+              onClick={quickStart.onStart}
+              className="mt-3 inline-flex min-h-11 items-center rounded-full bg-gold px-5 text-sm font-bold text-night hover:bg-gold-bright focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+            >
+              {quickStart.button}
+            </button>
+          </div>
+        ) : null}
         <div className="mt-5 max-w-3xl rounded-xl border border-night-line bg-night-soft p-4">
-          <h2 className="text-sm font-semibold text-night-ink">Try this</h2>
+          <h2 className="text-sm font-semibold text-night-ink">{quickStart ? "Or explore the full workflow" : "Try this"}</h2>
           <ol className="mt-2 list-decimal space-y-1.5 pl-5 text-sm leading-relaxed text-night-muted">
             {tryThis.map((item) => (
               <li key={item}>{item}</li>
@@ -59,7 +77,7 @@ export function DemoShell({
           <button
             type="button"
             onClick={onReset}
-            className="rounded-md border border-night-line px-3.5 py-2 font-semibold text-night-ink hover:bg-night-raised focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+            className="inline-flex min-h-11 items-center rounded-md border border-night-line px-3.5 py-2 font-semibold text-night-ink hover:bg-night-raised focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
           >
             Reset demo
           </button>

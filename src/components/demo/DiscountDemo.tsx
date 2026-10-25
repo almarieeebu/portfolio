@@ -62,7 +62,7 @@ export default function DiscountDemo() {
       title="Student discounts"
       intro="A browser simulation of a real app built in Frappe. Pick a discount rule, apply it to one student or a batch, and read the summary report. Nothing leaves your browser."
       tryThis={TRY_THIS}
-      backHref="/?panel=work&study=student-discounts"
+      backHref="/work/billing-and-payments#student-discounts"
       onReset={() => {
         reset();
         setPicked([]);

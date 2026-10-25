@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/demo/college-enrollment" },
 };
 
-export default function Page() {
-  return <CollegeDemo />;
+export default async function Page({ searchParams }: PageProps<"/demo/college-enrollment">) {
+  const { scenario } = await searchParams;
+  return <CollegeDemo scenario={typeof scenario === "string" ? scenario : undefined} />;
 }

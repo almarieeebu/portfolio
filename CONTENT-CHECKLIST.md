@@ -1,32 +1,38 @@
-# Content checklist
+# Content checklist (private)
 
-All site copy lives in `src/lib/content.ts`. The CVs are separate files in
-`public/` (`cv.html`, `cv-developer.html` and their PDFs) and must say the same
-thing as the site.
+All site copy lives in `src/lib/content.ts`. The CVs are `public/cv.html` and
+`public/cv-developer.html` (plus PDFs) and must say the same thing as the site.
 
 ## Confirmed
 
-- Current role: **Product Owner, Livro Systems, Inc., January 2026 – Present.**
-  The site and all four CVs agree. No restructuring note on either.
-- Public contact: email, LinkedIn, GitHub on the site. The CVs also list a
-  mobile number, WhatsApp and Telegram (owner-approved, 2026-10-07).
-- Public address: `https://portfolio-almariebu.vercel.app`, open to logged-out
-  visitors. `site.url` matches it; it drives the canonical URL, sitemap,
-  robots.txt, OG image and structured data. The CVs link to the same address.
+- Current role: Product Owner, Livro Systems, Inc., January 2026 – Present.
+- GitHub profile is `almarieeebu` (the old `almariebu` returns 404).
+- Public address: `https://portfolio-almariebu.vercel.app` (loads).
+  `almariedev.com` fails DNS. No DNS or hosting change has been made.
 
-## Open
+## Facts still needed (nothing is invented in the meantime)
 
-- [ ] Case studies (`caseStudies`, 9 entries) are pending a demo site. They
-      render only inside the Work panel, canonicalize to the home page and are
-      not in the sitemap. Revisit once the demo exists.
-- [ ] Case-study claims have no source ledger yet. Read each one as if an
-      interviewer will ask about it.
+- [ ] **Dates per contribution.** When was each piece built (enrollment forms, account closing,
+      online payments, discounts, migration), and in which role (Developer vs Product Owner)?
+- [ ] **Team vs you.** For each story: who else worked on it, and what did they own?
+- [ ] **Product decisions and tradeoffs.** Pages only list rules from the public demo code.
+      Real decisions you made (what was cut, what you weighed, who you consulted) are missing.
+- [ ] **Outcomes.** No metrics, adoption, time saved, or user feedback are published. Supply
+      numbers or quotes you can stand behind, and where they come from.
+- [ ] **Product Owner evidence.** What backlog, prioritisation, stakeholder or release
+      decisions have you owned since January 2026? No PO résumé exists, so none is labelled as one.
+- [ ] **ERP Livro employee lifecycle.** Only "develop and maintain onboarding, offboarding,
+      and access requests" is known. It stays in Experience until there is a real story.
+- [ ] **Grading and SMS/email.** Removed from the showcase. Demos remain at `/demo/grading`
+      and `/demo/sms-and-email`. Say if they should be linked somewhere.
+- [ ] **LinkedIn URL** could not be verified automatically (LinkedIn blocks bots). Please click it.
+- [ ] **Domain.** If `almariedev.com` is yours, decide whether to point it at Vercel, then
+      update `site.url` and both CVs.
+- [ ] **Education** is on no résumé or page.
 
 ## When something changes
 
-- Role or dates: update `experience` and the `about` paragraphs/facts in
-  `content.ts`, then both CV HTML files, then regenerate both PDFs.
-- Domain: update `site.url` in `content.ts`, then the portfolio link in both CV
-  HTML files, then regenerate both PDFs.
-- Run `bash scripts/check-cv.sh public/cv.html` and
-  `bash scripts/check-cv.sh public/cv-developer.html` after any CV edit.
+- Role or dates: `experience` in `content.ts`, then both CV HTML files, then regenerate PDFs
+  (`Chrome --headless --print-to-pdf`).
+- Domain: `site.url` in `content.ts`, the portfolio link in both CVs, regenerate PDFs.
+- Run `bash scripts/check-cv.sh public/cv.html` and `public/cv-developer.html` after CV edits.
